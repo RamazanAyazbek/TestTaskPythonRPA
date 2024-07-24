@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 root_path = str(Path(__file__).resolve().parents[1])
 
 
-def categorize_files_by_type(root_path: str) -> str:
+def categorize_files_by_type(root_path: str) -> dict:
     dict1 = {}
     try:
         logging.info(f"Начинаем категоризацию корневого пути: {root_path}")
@@ -38,9 +38,12 @@ def categorize_files_by_type(root_path: str) -> str:
                 logging.debug(f"Добавлен файл: {value} ключ: {key}")
 
         logging.info("Классификация завершена. Подготовка вывода.")
-
+        
+        
+        # возвращать результат функции на формате словарь
         return dict1
-        # Компактно вывести на консоль
+
+        # Компактно вывести на консоль (здесь возвращает на формате str)
         # return json.dumps(dict1, indent=4, ensure_ascii=False)
 
     except (FileNotFoundError, NotADirectoryError) as e:
@@ -51,7 +54,7 @@ def categorize_files_by_type(root_path: str) -> str:
         return f"Неизвестная ошибка: {e}"
 
 
-#
+
 print(categorize_files_by_type(root_path))
 
 
